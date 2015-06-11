@@ -51,7 +51,9 @@ elseif has('multi_byte') == 0
 else
     let g:vdebug_force_ascii = 0
 end
-
+if !exists("g:vdebug_powerline_fonts")
+    let g:vdebug_powerline_fonts = 0
+endif
 if !exists("g:vdebug_options")
     let g:vdebug_options = {}
 endif
@@ -119,13 +121,24 @@ command! -nargs=? VdebugEval python debugger.handle_eval(<q-args>)
 command! -nargs=+ -complete=customlist,s:OptionNames VdebugOpt python debugger.handle_opt(<f-args>)
 
 " Signs and highlighted lines for breakpoints, etc.
-sign define current text=-> texthl=DbgCurrentSign linehl=DbgCurrentLine
-sign define breakpt text=B> texthl=DbgBreakptSign linehl=DbgBreakptLine
-
-hi default DbgCurrentLine term=reverse ctermfg=White ctermbg=Red guifg=#ffffff guibg=#ff0000
-hi default DbgCurrentSign term=reverse ctermfg=White ctermbg=Red guifg=#ffffff guibg=#ff0000
-hi default DbgBreakptLine term=reverse ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
-hi default DbgBreakptSign term=reverse ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
+if g:vdebug_powerline_fonts
+    sign define current text=▶ texthl=DbgCurrentSign linehl=DbgCurrentLine
+    sign define breakpt text=● texthl=DbgBreakptSign linehl=DbgBreakptLine
+else
+    sign define current text=-> texthl=DbgCurrentSign linehl=DbgCurrentLine
+    sign define breakpt text=B> texthl=DbgBreakptSign linehl=DbgBreakptLine
+endif
+if &t_Co == 256
+    hi default DbgCurrentLine term=reverse cterm=underline 
+    hi default DbgCurrentSign term=reverse ctermfg=46
+    hi default DbgBreakptLine term=reverse ctermbg=124
+    hi default DbgBreakptSign term=reverse ctermfg=124
+else
+    hi default DbgCurrentLine term=reverse ctermfg=White ctermbg=Red gui=underline
+    hi default DbgCurrentSign term=reverse ctermfg=White ctermbg=Red guifg=#ffffff guibg=#ff0000
+    hi default DbgBreakptLine term=reverse ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
+    hi default DbgBreakptSign term=reverse ctermfg=White ctermbg=Green guifg=#ffffff guibg=#00ff00
+endif
 
 function! s:BreakpointTypes(A,L,P)
     let arg_to_cursor = strpart(a:L,11,a:P)
