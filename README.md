@@ -1,14 +1,18 @@
 # Vdebug
 
-[![Build Status](https://travis-ci.org/joonty/vdebug.png?branch=master)](https://travis-ci.org/joonty/vdebug)
-
-## Important announcement
-
-*I'm looking for someone to help maintain Vdebug!* Read the following and please help if you can:
-http://blog.joncairns.com/2015/01/looking-for-another-vdebug-maintainer/
-
 ## Introduction
 
+I forked this plugin because dev was slow and there were features I needed asap.
+I added remote debugging which seems like other people had success getting to work
+but I never could. It now works flawlessly for me. I also added some unicode symbols
+for the pointer and breakpoint if you have a font that will support it on a terminal.
+For 256 color terminals I added better colors for the pointer and breakpoint but I
+have only tested it with a dark background. I also fixed the jumpiness when steping
+through code.
+
+## Introduction from Joonty
+
+https://github.com/joonty/vdebug
 Vdebug is a new, fast, powerful debugger client for Vim. It's multi-language,
 and has been tested with PHP, Python, Ruby, Perl, Tcl and NodeJS. It interfaces with 
 **any** debugger that faithfully uses the DBGP protocol, such as Xdebug for PHP.  
@@ -27,34 +31,8 @@ some of the more critical parts of the code.
 
 If you're having trouble with Vdebug in any way, here are the steps you can take to get help (in the right order):
 
-  1. [Check the issues][3] to see whether it's already come up.
-  2. Visit the **#vdebug** irc channel on freenode, someone is normally there.
-  3. [Open a new issue.][4]
-
-## News
-
-Follow me on Twitter, [@joonty](http://twitter.com/joonty), for Vdebug updates and release news.
-
-* **15/05/2014:** Version 1.4.2 was released. This fixes major problems with the latest version of Vim, which has stricter rules around function naming. See [this pull request for more details][5]
-* **12/04/2014:** My son was born! Hence no contact or work on Vdebug for the following month.
-
-
-## Recent version (version 1.4.2)
-
-### Bug fixes:
- * Allow overriding of options dictionary after sourcing vdebug (issues #112, #113)
- * Show local file path in stack window if using path mapping (issue #118)
- * Change function names for stricter rules introduced in Vim v.7.4.260 (thanks @BlackEagle, #158 and #155)
-
-### Documentation:
- * Various fixes
- * Mention vim-nox package for Debian (thanks @henningda, #138)
- * Add Python installation for Windows information (issue #135)
-
-### Features:
- * Add completion to :Breakpoint command (thanks @tommcdo, #124)
- * Add VdebugStart command (thanks @blueyed, #132)
- * Sleep for 100ms in wait loop, don't consume as much CPU (thanks @blueyed, #133)
+  1. Check issues to see whether it's already come up.
+  3. Open a new issue
 
 ## How to use
 
