@@ -113,7 +113,8 @@ class Runner:
                 stack_res = self.update_stack()
                 stack = stack_res.get_stack()
 
-                self.cur_file = vdebug.util.LocalFilePath(stack[0].get('filename'))
+                file_path = vdebug.util.FilePath(stack[0].get('filename'))
+                self.cur_file = file_path.as_local()
                 self.cur_lineno = stack[0].get('lineno')
 
                 vdebug.log.Log("Moving to current position in source window")

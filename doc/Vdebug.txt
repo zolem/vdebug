@@ -798,7 +798,9 @@ The default options look like this: >
     \    "watch_window_style" : 'expanded',
     \    "marker_default" : '⬦',
     \    "marker_closed_tree" : '▸',
-    \    "marker_open_tree" : '▾'
+    \    "marker_open_tree" : '▾',
+    \    "continuous_mode"  : 0,
+    \    "powerline_patched_font" : 0
     \}
 <
 You can either use the multi-line notation like above, or set individual keys:
@@ -818,6 +820,7 @@ g:vdebug_options["port"] (default = 9000)
 
                                                         *VdebugOptions-server*
 g:vdebug_options["server"] (default = "localhost")      
+    This option is deprecated, no need to set the server to listen for
     Sets the address that Vdebug will use to listen for connections. It
     defaults to localhost, as it assumes that the debugger engine will be
     running on the same machine and also connecting to localhost. If you want
@@ -908,6 +911,16 @@ g:vdebug_options["continuous_mode"] (default = 0)
     session has finished, allowing for constant debugging across separate
     requests. Press <F6> during a debugging session to stop this, or <Ctrl-C>
     when Vdebug is listening.
+
+                                        *VdebugOptions-powerline_patched_font*
+g:vdebug_options["powerline_patched_font"] (default = 0)
+    If this option is enabled vdebug will try to use your patched font for
+    powerline to display symbols for breakpoints and current line marker. I 
+    recomend Sauce Code Pro.
+    https://github.com/powerline/fonts/tree/master/SourceCodePro
+    If you can see the below examples then your font will support this option.
+    Ex Pointer: ▶
+    Ex Breakpoint: ●
 
 ==============================================================================
 6. Key maps                                                       *VdebugKeys*

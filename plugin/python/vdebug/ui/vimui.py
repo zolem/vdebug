@@ -209,7 +209,8 @@ class Ui(vdebug.ui.interface.Ui):
 class SourceWindow(vdebug.ui.interface.Window):
 
     file = None
-    pointer_sign_id = '6145'
+    pointer_sign_id = 6145
+    prevpointer_sign_id = 6144
     breakpoint_sign_id = '6146'
 
     def __init__(self,ui,winno):
@@ -234,7 +235,7 @@ class SourceWindow(vdebug.ui.interface.Window):
 
     def set_line(self,lineno):
         self.focus()
-        vim.command("normal %sggzz" % str(lineno))
+        vim.command("normal %szz" % str(lineno))
 
     def get_file(self):
         self.focus()
@@ -247,13 +248,15 @@ class SourceWindow(vdebug.ui.interface.Window):
     def place_pointer(self,line):
         vdebug.log.Log("Placing pointer sign on line "+str(line),\
                 vdebug.log.Logger.INFO)
-        self.remove_pointer()
-        vim.command('sign place '+self.pointer_sign_id+\
+        vim.command('sign place '+str(self.pointer_sign_id)+\
                 ' name=current line='+str(line)+\
                 ' file='+self.file)
+        self.remove_pointer()
+        self.pointer_sign_id += 1
+        self.prevpointer_sign_id += 1
 
     def remove_pointer(self):
-        vim.command('sign unplace %s' % self.pointer_sign_id)
+        vim.command('sign unplace %s' % str(self.prevpointer_sign_id))
 
 class Window(vdebug.ui.interface.Window):
     name = "WINDOW"
